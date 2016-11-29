@@ -429,10 +429,11 @@ void show_pd_annotations(struct srd_proto_data *pdata, void *cb_data)
 	if (!pd_ann_visible)
 		return;
 
-	if (!g_hash_table_lookup_extended(pd_ann_visible, pdata->pdo->di->inst_id,
-			NULL, (void **)&ann_list))
+	if (!g_hash_table_lookup_extended(pd_ann_visible, pdata->pdo->di->decoder->id,
+			NULL, (void **)&ann_list)) {
 		/* Not in the list of PDs whose annotations we're showing. */
 		return;
+	}
 
 	dec = pdata->pdo->di->decoder;
 	pda = pdata->data;
